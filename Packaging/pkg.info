@@ -1,0 +1,5 @@
+#vim: set syntax=sh
+
+# 'cause I'm lazy.
+pkgname=noteo-git
+pkgver=0.2.6

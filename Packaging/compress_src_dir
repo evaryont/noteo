@@ -1,7 +1,10 @@
 #!/bin/bash
 
-pkgver=0.1.6
+. pkg.info
+name="${pkgname}-${pkgver}"
 
-cp -r ../src noteo-"$pkgver"
+cp -r ../src $name
 
-tar --exclude=*~ -cvzf noteo-${pkgver}.tar.gz noteo-"$pkgver"
+tar --exclude=*~ -cvzf ${name}.tar.gz ${name}
+
+rm -rf ${name}
