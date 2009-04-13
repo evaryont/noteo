@@ -54,18 +54,22 @@ class Popup(NoteoModule):
  
         popup = gtk.Window(gtk.WINDOW_POPUP)
         max_chars = self.config['maxCharsPerLine']
+        popup.set_opacity(self.config['opacity'])
+	popup.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#000000'))
 
         summary_label = gtk.Label()
         summary_label.set_markup(summary)
-        summary_label.show()
         summary_label.set_line_wrap(True)
         summary_label.set_width_chars(max_chars)
+	summary_label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#ffffff'))
+        summary_label.show()
 
 	content_label = gtk.Label()
         content_label.set_markup(content)
-        content_label.show()
         content_label.set_line_wrap(True)
         content_label.set_width_chars(max_chars)
+	content_label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#ffffff'))
+        content_label.show()
 
 	vbox = gtk.VBox()
         vbox.pack_start(summary_label)
@@ -76,7 +80,6 @@ class Popup(NoteoModule):
         hbox.pack_start(vbox)
         
 	popup.add(hbox)
-        popup.set_opacity(self.config['opacity'])
         popup.show_all()
 
         return popup
