@@ -55,7 +55,7 @@ class Popup(NoteoModule):
         popup = gtk.Window(gtk.WINDOW_POPUP)
         max_chars = self.config['maxCharsPerLine']
         popup.set_opacity(self.config['opacity'])
-	popup.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#000000'))
+	popup.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#131313'))
 
         summary_label = gtk.Label()
         summary_label.set_markup(summary)
