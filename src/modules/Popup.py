@@ -13,6 +13,9 @@ class Popup(NoteoModule):
         'xOffset': 'integer(default=0)',
         'yOffset': 'integer(default=30)',
 	'verticalSpacing': 'integer(default=2)',
+	'use-custom-colours': 'boolean(default=True)',
+        'fg-colour': 'string(default=\'#ffffff\')',
+        'bg-colour': 'string(default=\'#131313\')',
         }
     def init(self):
         self.noteo.gtk_required()
@@ -55,20 +58,17 @@ class Popup(NoteoModule):
         popup = gtk.Window(gtk.WINDOW_POPUP)
         max_chars = self.config['maxCharsPerLine']
         popup.set_opacity(self.config['opacity'])
-	popup.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#131313'))
 
         summary_label = gtk.Label()
         summary_label.set_markup(summary)
         summary_label.set_line_wrap(True)
         summary_label.set_width_chars(max_chars)
-	summary_label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#ffffff'))
         summary_label.show()
 
 	content_label = gtk.Label()
         content_label.set_markup(content)
         content_label.set_line_wrap(True)
         content_label.set_width_chars(max_chars)
-	content_label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#ffffff'))
         content_label.show()
 
 	vbox = gtk.VBox()
@@ -78,7 +78,12 @@ class Popup(NoteoModule):
         hbox = gtk.HBox()
         hbox.pack_start(gtk.image_new_from_pixbuf(icon))
         hbox.pack_start(vbox)
-        
+
+	if self.config['use-custom-colours']:
+	  popup.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse(self.config['bg-colour']))
+	  summary_label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(self.config['fg-colour']))
+	  content_label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(self.config['fg-colour']))
+
 	popup.add(hbox)
         popup.show_all()
 
