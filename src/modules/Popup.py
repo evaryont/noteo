@@ -13,7 +13,7 @@ class Popup(NoteoModule):
         'xOffset': 'integer(default=0)',
         'yOffset': 'integer(default=30)',
 	'verticalSpacing': 'integer(default=2)',
-	'use-custom-colours': 'boolean(default=True)',
+	'use-custom-colours': 'boolean(default=False)',
         'fg-colour': 'string(default=\'#ffffff\')',
         'bg-colour': 'string(default=\'#131313\')',
         }
@@ -27,7 +27,7 @@ class Popup(NoteoModule):
             event.get_content(),
             event.get_icon()
             )
-        popup_timeout = 5
+        popup_timeout = self.config['defaultTimeout']
         if event.get_timeout() > 0:
             popup_timeout = event.get_timeout()
         destroy_popup_event = FunctionCallEvent(
